@@ -1,0 +1,11 @@
+[*.{kt,kts}]
+# Specify the kotlin_official style
+kotlin_code_style = official
+# Indent size
+indent_size = 4
+# Continuation indent size
+continuation_indent_size = 4
+# Insert a blank line before declarations
+insert_final_newline = true
+# Maximum line length
+max_line_length = 120
