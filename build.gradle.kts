@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm") version "1.9.24"
     kotlin("plugin.spring") version "1.9.24"
     id("org.flywaydb.flyway") version "8.5.13"
+    id("org.jetbrains.kotlin.plugin.jpa") version "2.0.10"
 }
 
 group = "com.ym"
