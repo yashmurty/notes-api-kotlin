@@ -1,5 +1,8 @@
 package com.ym.notes
 
+import com.ym.notes.application.note.CreateNoteCommand
+import com.ym.notes.application.note.NoteResponse
+import com.ym.notes.application.note.NoteService
 import com.ym.notes.domain.note.Note
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -19,9 +22,9 @@ class NoteController(private val noteService: NoteService) {
     }
 
     @PostMapping
-    fun createNote(@RequestBody note: Note): ResponseEntity<Note> {
-        val newNote = noteService.createNote(note)
-        return ResponseEntity(newNote, HttpStatus.CREATED)
+    fun createNote(@RequestBody command: CreateNoteCommand): ResponseEntity<NoteResponse> {
+        val response = noteService.createNote(command)
+        return ResponseEntity(response, HttpStatus.CREATED)
     }
 
     @PutMapping("/{id}")

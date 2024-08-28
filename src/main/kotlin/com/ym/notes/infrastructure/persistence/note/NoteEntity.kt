@@ -1,7 +1,7 @@
 package com.ym.notes.infrastructure.persistence.note
 
 import jakarta.persistence.*
-import java.time.LocalDateTime
+import java.time.Instant
 
 @Entity
 @Table(name = "notes")
@@ -16,8 +16,8 @@ class NoteEntity(
     val content: String,
 
     @Column(name = "created_at", nullable = false)
-    val createdAt: LocalDateTime = LocalDateTime.now(),
+    val createdAt: Long = Instant.now().toEpochMilli(),
 
     @Column(name = "updated_at", nullable = false)
-    val updatedAt: LocalDateTime = LocalDateTime.now()
+    val updatedAt: Long = Instant.now().toEpochMilli()
 )
