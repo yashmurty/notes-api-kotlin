@@ -3,7 +3,7 @@ package com.ym.notes
 import com.ym.notes.application.note.CreateNoteCommand
 import com.ym.notes.application.note.NoteResponse
 import com.ym.notes.application.note.NoteService
-import com.ym.notes.domain.note.Note
+import com.ym.notes.application.note.UpdateNoteCommand
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/notes")
 class NoteController(private val noteService: NoteService) {
     @GetMapping
-    fun getAllNotes(): List<Note> = noteService.getAllNotes()
+    fun getAllNotes(): List<NoteResponse> = noteService.getAllNotes()
 
     @GetMapping("/{id}")
-    fun getNoteById(@PathVariable id: Int): ResponseEntity<Note> {
-        val note = noteService.getNoteById(id)
-        return note?.let { ResponseEntity.ok(note) } ?: ResponseEntity.notFound().build()
+    fun getNoteById(@PathVariable id: Int): ResponseEntity<NoteResponse> {
+        val response = noteService.getNoteById(id)
+        return response?.let { ResponseEntity.ok(response) } ?: ResponseEntity.notFound().build()
     }
 
     @PostMapping
@@ -28,9 +28,9 @@ class NoteController(private val noteService: NoteService) {
     }
 
     @PutMapping("/{id}")
-    fun updateNote(@PathVariable id: Int, @RequestBody updatedNote: Note): ResponseEntity<Note> {
-        val note = noteService.updateNote(id, updatedNote)
-        return note?.let { ResponseEntity.ok(note) } ?: ResponseEntity.notFound().build()
+    fun updateNote(@PathVariable id: Int, @RequestBody command: UpdateNoteCommand): ResponseEntity<NoteResponse> {
+        val response = noteService.updateNote(id, command)
+        return response?.let { ResponseEntity.ok(response) } ?: ResponseEntity.notFound().build()
     }
 
     @DeleteMapping("/{id}")

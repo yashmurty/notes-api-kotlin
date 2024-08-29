@@ -23,10 +23,4 @@ data class Note(
         require(newTitle.isNotBlank()) { "Title cannot be blank" }
         return copy(title = newTitle, updatedAt = Instant.now().toEpochMilli())
     }
-
-    companion object {
-        fun create(title: String, content: String): Note {
-            return Note(title = title, content = content)
-        }
-    }
 }
