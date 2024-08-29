@@ -1,4 +1,4 @@
-package com.ym.notes
+package com.ym.notes.presentation.note
 
 import com.ym.notes.application.note.CreateNoteCommand
 import com.ym.notes.application.note.NoteResponse
@@ -8,12 +8,11 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
-
 @RestController
 @RequestMapping("/api/notes")
 class NoteController(private val noteService: NoteService) {
     @GetMapping
-    fun getAllNotes(): List<NoteResponse> = noteService.getAllNotes()
+    fun getAllNotes(): ResponseEntity<List<NoteResponse>> = ResponseEntity.ok(noteService.getAllNotes())
 
     @GetMapping("/{id}")
     fun getNoteById(@PathVariable id: Int): ResponseEntity<NoteResponse> {
