@@ -2,7 +2,6 @@ package com.ym.notes.infrastructure.persistence.note
 
 import com.ym.notes.domain.note.Note
 import com.ym.notes.domain.note.NoteRepository
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -10,7 +9,7 @@ class NoteRepositoryImpl(private val jpaRepository: NoteJpaRepository) : NoteRep
 
     override fun findAll(): List<Note> = jpaRepository.findAll().map { it.toDomainModel() }
 
-    override fun findById(id: Int): Note? = jpaRepository.findByIdOrNull(id)?.toDomainModel()
+    override fun findById(id: Int): Note? = jpaRepository.findById(id).orElse(null)?.toDomainModel()
 
     override fun save(note: Note): Note {
         val entity = note.toEntity()
