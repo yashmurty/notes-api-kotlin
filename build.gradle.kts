@@ -36,6 +36,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("com.h2database:h2")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
 }
 
 kotlin {
@@ -75,4 +76,14 @@ flyway {
     url = System.getenv("DB_URL")
     user = System.getenv("DB_USER")
     password = System.getenv("DB_PASSWORD")
+}
+
+kover {
+    reports {
+        verify {
+            rule {
+                minBound(75)
+            }
+        }
+    }
 }
